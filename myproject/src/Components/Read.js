@@ -23,7 +23,7 @@ const Read = () => {
         getData();
       });
   }
-  const setToLocalStrorage = (id, name, email) => {
+  const setToLocalStrorage = (id, name, email,age, address) => {
     localStorage.setItem("id", id);
     localStorage.setItem("name", name);
     localStorage.setItem("email", email);

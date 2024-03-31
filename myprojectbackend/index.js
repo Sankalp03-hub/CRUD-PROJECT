@@ -14,7 +14,7 @@ app.use(cors())
 connectDB();
 
 // Routes
-app.use('/us    ers', userRoutes);
+app.use('/users', userRoutes);
 
 const port = process.env.PORT || 4001;
 app.listen(port, () => console.log(`Server running on port ${port}`));
