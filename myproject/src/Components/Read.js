@@ -7,7 +7,7 @@ const Read = () => {
   
 
   function getData() {
-    axios.get("http://localhost:4000/users").then((res) => {
+    axios.get("https://teachnodrome-1.onrender.com/users").then((res) => {
       console.log(res.data);
       setData(res.data);
     });
@@ -15,7 +15,7 @@ const Read = () => {
 
   function handleDelete(id) {
     axios
-      .delete(`http://localhost:4000/users/${id}`)
+      .delete(`https://teachnodrome-1.onrender.com/users/${id}`)
       .then(() => {
         getData();
       })

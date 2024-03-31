@@ -1,47 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios"; //it provide package to get req & send res form server
-import { useNavigate } from "react-router-dom"; //when click on submit button
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom"; //when click on submit button
 
-const Create = () => {
-  const [name, setName] = useState(""); // take data by "setName" and store into "name".
+
+const Update = () => {
+  const [id, setId] = useState(0);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [age, setAge] = useState("");
   const [address, setAddress] = useState("");
-  const history = useNavigate();
 
-  const header = { "Access-control-allow-origin": "*" };
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    setId(localStorage.getItem("id"));
+    setName(localStorage.getItem("name"));
+    setEmail(localStorage.getItem("email"));
+    setName(localStorage.getItem("age"));
+    setEmail(localStorage.getItem("address"));
+  }, []);
+
+  const handleUpdate = (e) => {
     e.preventDefault();
-    console.log("clicked");
-    axios.post("http://localhost:4000/users", {
-      name: name,
-      email: email,
-      age:age,
-      address:address,
-      header
-    })
-    .then(()=>{
-        history("/read"); //after submit clicked we should be on read page
-
-    })
+    console.log("Id...", id);
+    axios
+      .put(`https://teachnodrome-1.onrender.com/users/${id}`, {
+        name: name,
+        email: email,
+        age: age,
+        address:"address"
+      })
+      .then(() => {
+        navigate("/read");
+      });
   };
 
   return (
     <>
-      <div className="d-flex justify-content-between">
-        <h1>Create</h1>
-        <Link to="/read">
-        <button className="btn btn-sm btn-primary">Show Data</button>
-        </Link>
-        </div>
       <form>
+        <h1>Update</h1>
         <div className="mb-3">
           <label className="form-label">Name</label>
           <input
             type="text"
             className="form-control"
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
@@ -51,7 +55,7 @@ const Create = () => {
           <input
             type="email"
             className="form-control"
-            aria-describedby="emailHelp"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -76,22 +80,24 @@ const Create = () => {
           />
         </div>
 
-
         {/* {name}
         {email} */}
 
         <button
           type="submit"
-          className="btn btn-primary"
-          onClick={handleSubmit}
+          className="btn btn-success"
+          onClick={handleUpdate}
         >
-          Add Data
+          Update
         </button>
+        <Link to ="/read" >
+        <button  className="btn btn-secondary mx-2">
+          Back
+        </button>
+        </Link>
       </form>
     </>
   );
 };
 
-export default Create;
-
-
+export default Update;
