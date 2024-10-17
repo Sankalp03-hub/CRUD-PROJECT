@@ -1,14 +1,15 @@
-require('dotenv').config()
 const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userroutes');
-const connectDB = require('./config/database');
+const connectDB = require('./config/database');   //  uri of mongodb atalas
+require("dotenv").config();
+
 
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors())
+app.use(cors())  
 
 // MongoDB connection
 connectDB();
@@ -16,5 +17,5 @@ connectDB();
 // Routes
 app.use('/users', userRoutes);
 
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Server running on port ${port}`));

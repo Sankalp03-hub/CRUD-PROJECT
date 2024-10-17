@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"; //when click on
 import Read from "./Components/Read"
 import Update from './Components/Update';
 
+
 function App() {
   return (
   <div className="container">
@@ -12,7 +13,8 @@ function App() {
     <Routes>
     <Route exact path="/" element={<Create/>}></Route>  // add "/" to url route to Create page
     <Route exact path="/read" element={<Read/>}></Route>  
-    <Route exact path="/update" element={<Update/>}></Route>  
+    <Route exact path="/update" element={<Update/>}></Route> 
+ 
     </Routes>
     </BrowserRouter>
   </div>

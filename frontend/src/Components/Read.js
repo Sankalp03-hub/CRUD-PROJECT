@@ -4,18 +4,16 @@ import { Link } from "react-router-dom"; //when click on submit button
 
 const Read = () => {
   const [data, setData] = useState([]);
-  
 
   function getData() {
-    axios.get("https://teachnodrome-1.onrender.com/users").then((res) => {
-      console.log(res.data);
+    axios.get("http://localhost:4000/users").then((res) => {
       setData(res.data);
     });
   }
 
-  function handleDelete(id) {
+  function handleDelete(_id) {
     axios
-      .delete(`https://teachnodrome-1.onrender.com/users/${id}`)
+      .delete(`http://localhost:4000/users/${_id}`)
       .then(() => {
         getData();
       })
@@ -23,8 +21,8 @@ const Read = () => {
         getData();
       });
   }
-  const setToLocalStrorage = (id, name, email,age, address) => {
-    localStorage.setItem("id", id);
+  const setToLocalStrorage = (_id, name, email, age, address) => {
+    localStorage.setItem("_id", _id);
     localStorage.setItem("name", name);
     localStorage.setItem("email", email);
     localStorage.setItem("age", age);
@@ -37,16 +35,16 @@ const Read = () => {
 
   return (
     <>
-       <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between">
         <h1>Read Operation</h1>
         <Link to="/">
-        <button className="btn btn-sm btn-secondary">create Data</button>
+          <button className="btn btn-sm btn-secondary">create Data</button>
         </Link>
-        </div>
+      </div>
       <table className="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            {/* <th scope="col">#</th> */}
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Age</th>
@@ -61,7 +59,7 @@ const Read = () => {
             <>
               <tbody>
                 <tr>
-                  <th scope="row">{eachData.id}</th>
+                  {/* <th scope="row">{eachData._id}</th> */}
                   <td>{eachData.name}</td>
                   <td>{eachData.email}</td>
                   <td>{eachData.age}</td>
@@ -72,7 +70,7 @@ const Read = () => {
                         className="btn btn-success"
                         onClick={() =>
                           setToLocalStrorage(
-                            eachData.id,
+                            eachData._id,
                             eachData.name,
                             eachData.email,
                             eachData.age,
@@ -87,7 +85,7 @@ const Read = () => {
                   <td>
                     <button
                       className="btn btn-danger"
-                      onClick={() => handleDelete(eachData.id)}
+                      onClick={() => handleDelete(eachData._id)}
                     >
                       Delete
                     </button>
